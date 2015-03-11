@@ -1,0 +1,7 @@
+sftp-config.json
+assets/css/main.css
+assets/css/main.css.map
+assets/vendor/*
+less/bootstrap/*
+node_modules
+bower_components

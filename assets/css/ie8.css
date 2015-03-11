@@ -1,0 +1,19 @@
+
+#main{
+	width: 1280px !important;
+	magin: 0 auto !important;
+}
+
+.col-1,
+.col-2,
+.col-3{
+	float: left;
+}
+
+.col-1{
+	width: 20%;
+	float: left;
+}
+.col-2{
+	width: 50%;
+}
