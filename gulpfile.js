@@ -1,24 +1,32 @@
 var less = require('gulp-less'),
-	path = require('path'),
-	gulp = require('gulp'),
-	LessPluginCleanCSS = require('less-plugin-clean-css'),
-	cleancss = new LessPluginCleanCSS({ advanced: true }),
+    path = require('path'),
+    gulp = require('gulp'),
+    LessPluginCleanCSS = require('less-plugin-clean-css'),
+    cleancss = new LessPluginCleanCSS({ advanced: true }),
     autoprefixer = require('gulp-autoprefixer'),
-    sourcemaps = require('gulp-sourcemaps');
+    sourcemaps = require('gulp-sourcemaps'),
+    livereload = require('gulp-livereload'),
+    notify = require('gulp-notify');
+
 
 gulp.task('less', function () {
 
   return gulp.src(['./assets/less/main.less'])
-  	.pipe(sourcemaps.init())
-    .pipe(less({
-      plugins: [],
-    }))
-   //  .pipe( autoprefixer({
-		 // browsers: ['last 2 versions'],
-		 // cascade: false
-   //  }) )
+    .pipe(sourcemaps.init())
+    .pipe(
+      less()
+      .on("error", notify.onError(function (error) {
+          return "Message to the notifier: " + error.message;
+       }))
+    )
     .pipe( sourcemaps.write('./assets/css') )
-    .pipe( gulp.dest( './assets/css' ) );
+    .pipe( gulp.dest( './assets/css' ) )
+    .pipe( notify({ 
+          message: 'Successfully compiled LESS',
+          emitError: true
+          })
+    )
+    .pipe( livereload() );
 
 });
 
@@ -34,28 +42,34 @@ gulp.task('bootstrap', function(){
 
 gulp.task('dev', function(){
 
-	// Css
-  return gulp.src(['./assets/less/main.less'])
-  	.pipe( sourcemaps.init() )
-    .pipe( less() )
-    .pipe( sourcemaps.write('./assets/css') )
-    .pipe( gulp.dest( './assets/css' ) );
+  // Css
+  livereload.listen(); 
+  gulp.watch('assets/less/*', ['less']);
+  gulp.watch(['./assets/less/_bootstrap.less', './assets/less/_bootstrap_variables.less'], ['bootstrap']);
+  gulp.watch(['*', 'inc/*', 'parts/*'], function(data){
+    gulp.src(data.path)
+      .pipe( livereload() );
+  });
 
 });
 
 gulp.task('dist', ['bootstrap'], function () {
 
-	// Css
+  // Css
   return gulp.src(['./assets/less/main.less'])
-  	.pipe( sourcemaps.init() )
-    .pipe(less())
+    .pipe( sourcemaps.init() )
+    .pipe( less() )
     .pipe( autoprefixer({
-		 browsers: ['last 2 versions'],
-		 cascade: false
+     browsers: ['last 2 versions'],
+     cascade: false
     }) )
     .pipe( sourcemaps.write('./assets/css') )
     .pipe( gulp.dest( './assets/css' ) );
 
-
-
 });
+
+/*==========  Utilities  ==========*/
+function consoleError(error){
+  console.log(error);
+  // this.emmit('end')
+}
