@@ -1,12 +1,13 @@
 <?php 
 /**
- * @package simpleTheme
- * @name Index Plage
+ * @package wpApp
+ * @author: Bogdan Petru Pintican
  * 
  * 404, blog, archive
  */
 $pageID = $wp_query->get_queried_object_id();
 get_header();
+global $wpApp;
 ?>
 
 

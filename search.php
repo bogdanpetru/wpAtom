@@ -1,5 +1,11 @@
-<?php get_header(); ?>
-
+<?php 
+/**
+ * @name Simple Page Template
+ * @package wpApp
+ * @author: Bogdan Petru Pintican
+ */
+get_header();
+?>
 	<div class="row">
 		
 		<!-- Home sidebar 1 -->
@@ -44,7 +50,5 @@
 
 	</div>
 	<!-- .row -->
-
-
 
 <?php get_footer(); ?>

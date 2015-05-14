@@ -1,10 +1,11 @@
 <?php 
 /**
  * @name Simple Page Template
- * @package simpleTheme
- * 
+ * @package wpApp
+ * @author: Bogdan Petru Pintican
  */
-
+global $wpApp;
+the_post();
 ?>
 
 <?php get_header(); ?>

@@ -1,9 +1,9 @@
 <?php 
 /**
- * @package simpleTheme
+ * @package wpApp
+ * @author: Bogdan Petru Pintican
  */
-global $simpleTheme;
-
+global $wpApp;
 ?><!DOCTYPE html>
 <html class="no-js" <?php language_attributes(); ?>>
 <head>
@@ -19,19 +19,21 @@ global $simpleTheme;
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
 	<!-- Styles -->
-	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
-	<link rel="stylesheet" href="<?php bloginfo( 'template_url' ); ?>/assets/js/lib/slick/slick.css">
-	<link rel="stylesheet" href="<?php bloginfo( 'template_url' ); ?>/assets/js/lib/magnific/magnific.css">
-	<link rel="stylesheet" href="<?php bloginfo( 'template_url' ); ?>/assets/css/main.css">
+	<link rel="stylesheet" href="<?php bloginfo('stylesheet_directory') ?>/assets/css/_bootstrap.css">
+	<link rel="stylesheet" href="<?php bloginfo( 'template_url' ); ?>/bower_components/slick.js/slick/slick.css">
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+	<link rel="stylesheet" href="<?php bloginfo('stylesheet_directory') ?>/assets/css/main.css">
 
+	<!-- Gmaps -->
+	<script src="http://maps.gstatic.com/maps-api-v3/api/js/19/9/main.js"></script>
+	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+	<script type="text/javascript" src="<?php bloginfo( 'template_url' ) ?>/assets/js/markerwithlabel.js"></script>
+    
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-	
-	<!-- Google Maps -->
-	<script src="http://maps.gstatic.com/maps-api-v3/api/js/19/9/main.js"></script>
-	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+	<script src="<?php bloginfo( 'template_url' ); ?>/bower_components/modernizr-min/modernizr.min.js"></script>
 
 </head>
 
@@ -47,7 +49,6 @@ global $simpleTheme;
 
 	<header id="header" class="container">
 		
-
 		<div class="row">
 			<div class="logo col-sm-3">
 				<h1>
@@ -65,6 +66,4 @@ global $simpleTheme;
 
 	</header>
 
-
-	<div id="content" class="container">
 	
