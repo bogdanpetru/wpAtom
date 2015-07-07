@@ -125,8 +125,18 @@ class simepleStart {
 		} else {
 			return $this->getYoutubeImage($videoUrl);
 		}
-
 	}
+
+
+	public static function trim_words($string, $noWords, $more = ' [...]'){
+		if (strlen($string) > $noWords) 
+		{
+		    $string = wordwrap($string, $noWords);
+		    $string = substr($string, 0, strpos($string, "\n")) . $more;
+		}
+		return $string;
+	}
+
 }
 
 

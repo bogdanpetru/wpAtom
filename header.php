@@ -25,9 +25,11 @@ global $wpApp;
 	<link rel="stylesheet" href="<?php bloginfo('stylesheet_directory') ?>/assets/css/main.css">
 
 	<!-- Gmaps -->
-	<script src="http://maps.gstatic.com/maps-api-v3/api/js/19/9/main.js"></script>
-	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+	<!-- 
+	For labels
 	<script type="text/javascript" src="<?php bloginfo( 'template_url' ) ?>/assets/js/markerwithlabel.js"></script>
+	 -->
     
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>

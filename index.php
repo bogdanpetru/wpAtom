@@ -10,8 +10,6 @@ get_header();
 global $wpApp;
 ?>
 
-
-
 	<div class="row">
 		
 		<div class="featured-image col-xs-12">
@@ -33,17 +31,13 @@ global $wpApp;
 			<?php if ( have_posts() ) : ?>
 
 				<?php /* Start the Loop */ ?>
+				
 				<?php while ( have_posts() ) : the_post(); 
 					$img =  wp_get_attachment_image_src( get_post_thumbnail_id( get_the_id() ), 'full' );
-					$bfi_args = array( 'width'=> 120, 'height'=>90 );
-					$bfi_img = bfi_thumb( $img[0], $bfi_args );
 				?>
-					<div class="loop-item">	
-						<img src="<?= $bfi_img ?>">
-						<h3><a href="<?php the_permalink(); ?>"><?php the_title() ?></a> <br><span class="date"><?php the_date('d M. Y') ?></span></h3>
-						<?php the_excerpt(); ?>
-					</div>
+					<?php get_template_part('parts/loop', 'item'); ?>
 				<?php endwhile; 
+
 					echo wp_pagenavi( array( 'query' => $wp_query ) );
 				?>
 
