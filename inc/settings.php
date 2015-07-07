@@ -4,12 +4,23 @@
 =            Seetings             =
 =================================*/
 
+/**
+
+    TODO:
+    - Make sure enquire works
+    - Add the rest off the scripts 
+
+**/
+
 
 // Hide admin bar
 add_filter('show_admin_bar', '__return_false');
 
 /*==========  Register Menus  ==========*/
-register_nav_menus( array('primary' => 'Primary menu') );
+register_nav_menus( array(
+    'primary' => __( 'Primary Menu',      'wpApp' ),
+    'social'  => __( 'Social Links Menu', 'wpApp' ),
+) );
 
 
 /*==========  Register Sidebars  ==========*/
@@ -50,9 +61,12 @@ add_action( 'admin_init', 'enquire_scripts' );
 add_action( 'wp_enqueue_scripts', 'enquire_scripts' );
 
 
-/*==========  Add thumb capability  ==========*/
+/*==========  Add capability  ==========*/
 add_theme_support( 'post-thumbnails' );
-
+add_theme_support( 'title-tag' );
+add_theme_support( 'html5', array(
+    'search-form', 'comment-form', 'comment-list', 'gallery', 'caption'
+) );
 
 /*==========  New Query vars  ==========*/
 
@@ -90,6 +104,21 @@ function remove_menus(){
 // add_action( 'admin_menu', 'remove_menus' );
 
 
+/*==========  Enquire scripts and styles  ==========*/
+
+function wpApp_enquire_scripts() {
+
+    // wp_enqueue_style( $handle, $src, $deps, $ver, $media );
+
+    // Add custom fonts, used in the main stylesheet.
+    wp_enqueue_style( 'wpApp-main', get_template_directory_uri() . '/assets/css/main.css', array(), null );
+
+    // Load the Internet Explorer specific stylesheet.
+    wp_enqueue_style( 'wpApp-ie', get_template_directory_uri() . '/assets/css/ie8.css', array( 'wpApp-main' ) );
+    wp_style_add_data( 'wpApp-ie', 'conditional', 'lt IE 9' );
+
+}
+add_action( 'wp_enqueue_scripts', 'wpApp_enquire_scripts' );
 
 
 ?>
