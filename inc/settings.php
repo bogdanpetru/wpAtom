@@ -4,14 +4,6 @@
 =            Seetings             =
 =================================*/
 
-/**
-
-    TODO:
-    - Make sure enquire works
-    - Add the rest off the scripts 
-
-**/
-
 
 // Hide admin bar
 add_filter('show_admin_bar', '__return_false');
@@ -24,12 +16,10 @@ register_nav_menus( array(
 
 
 /*==========  Register Sidebars  ==========*/
-
-
 register_sidebar( array(
     'name' => __( 'Sidebar', 'wpApp' ),
     'id' => 'sidebar',
-    'description' => __( 'Widget-urile din aceasta zona vor aparea pe coloana 1 (sub submeniu).', 'wpApp' ),
+    'description' => __( 'Gemeroc Sodebar.', 'wpApp' ),
     'class'         => 'sidebar sidebar-1',
     'before_widget' => '<div id="%1$s" class="widget %2$s">',
     'after_widget'  => '</div>',
@@ -51,10 +41,11 @@ function enquire_scripts(){
 
     // Jquery
      wp_enqueue_script( 'jquery' );
-     wp_enqueue_script( 'jquery-ui-core' );
-     wp_enqueue_script( 'jquery-ui-widget' );
-     wp_enqueue_script( 'jquery-ui-slider' );
-     wp_enqueue_script( 'jquery-ui-selectmenu' );
+     
+     wp_enqueue_script( 'masonry' );
+     // wp_enqueue_script( 'jquery-ui-widget' );
+     // wp_enqueue_script( 'jquery-ui-slider' );
+     // wp_enqueue_script( 'jquery-ui-selectmenu' );
 }
 
 add_action( 'admin_init', 'enquire_scripts' );
@@ -73,8 +64,7 @@ add_theme_support( 'html5', array(
 // add `author_more` to query vars
 function add_date_query_var(){
     global $wp;
-    $wp->add_query_var( 'chiffre' );      
-    // $wp->add_query_var( '' );    
+    $wp->add_query_var( 'chiffre' );        
 }
 // add_filter( 'init', 'add_date_query_var' );
 
@@ -120,5 +110,16 @@ function wpApp_enquire_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'wpApp_enquire_scripts' );
 
+/*==========  Post2Post  ==========*/
 
-?>
+function register_relations() {
+    p2p_register_connection_type( array(
+        'name' => 'solution-pr',
+        'from' => 'solutions',
+        'to' => 'pr',
+        // 'admin_column' => 'any',
+         // 'admin_dropdown' => 'any',
+    ) );
+}
+
+// add_action( 'p2p_init', 'register_relations' );

@@ -7,6 +7,7 @@ var less = require('gulp-less'),
     sourcemaps = require('gulp-sourcemaps'),
     livereload = require('gulp-livereload'),
     notify = require('gulp-notify');
+//    browserSync = require('browser-sync');
 
 
 gulp.task('less', function () {
@@ -19,14 +20,15 @@ gulp.task('less', function () {
           return "Message to the notifier: " + error.message;
        }))
     )
-    .pipe( sourcemaps.write('./assets/css') )
-    .pipe( gulp.dest( './assets/css' ) )
+
+    .pipe( sourcemaps.write('./') )
+    .pipe( gulp.dest( './assets/css/' ) )
     .pipe( notify({ 
           message: 'Successfully compiled LESS',
           emitError: true
           })
-    )
-    .pipe( livereload() );
+    );
+    //.pipe( livereload() );
 
 });
 
@@ -43,13 +45,19 @@ gulp.task('bootstrap', function(){
 gulp.task('dev', function(){
 
   // Css
-  livereload.listen(); 
-  gulp.watch('assets/less/*', ['less']);
+  // livereload.listen(); 
+  gulp.watch('./assets/less/*.less', ['less']);
   gulp.watch(['./assets/less/_bootstrap.less', './assets/less/_bootstrap_variables.less'], ['bootstrap']);
   gulp.watch(['*', 'inc/*', 'parts/*'], function(data){
     gulp.src(data.path)
       .pipe( livereload() );
   });
+
+ //   browserSync({
+ //       proxy: "http://tricot.dev/"
+ // })
+  
+ // gulp.watch("./*").on('change', browserSync.reload);
 
 });
 
