@@ -3,8 +3,8 @@ var less = require('gulp-less'),
 	gulp = require('gulp'),
 	LessPluginCleanCSS = require('less-plugin-clean-css'),
 	cleancss = new LessPluginCleanCSS({ advanced: true }),
-    autoprefixer = require('gulp-autoprefixer'),
-    sourcemaps = require('gulp-sourcemaps');
+  autoprefixer = require('gulp-autoprefixer'),
+  sourcemaps = require('gulp-sourcemaps');
 
 gulp.task('less', function () {
 
