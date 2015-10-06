@@ -3,20 +3,14 @@
 
 /**
  *
- *	Document standard.
- *	Good names
- *	Comments for complex pices of code
- *	@var type of class prop
- *	@param   [varname] [description]
- *	@return [type] [description]
- *  @author [author] <[email]>
- *  @package [name]
+ *  @author [author] Bogdan Petru Pintican
+ *  @author [email] bogdanpintican@gmail.com
+ *  @package [name] wpApp
  *  
  * 
  */
 
-
-class simepleStart {
+class wpApp {
 
 	/**
 	 * Gets the Rss Feed
@@ -48,7 +42,6 @@ class simepleStart {
 		        'unix' => strtotime($item['date']),
 		        'description' => $node->getElementsByTagName('description')->item(0)->nodeValue,
 		    );
-
 
 			array_push($feed, $item);
 
@@ -125,8 +118,46 @@ class simepleStart {
 		} else {
 			return $this->getYoutubeImage($videoUrl);
 		}
-
 	}
+
+
+	public static function trim_words($string, $noWords, $more = ' [...]'){
+		if (strlen($string) > $noWords) 
+		{
+		    $string = wordwrap($string, $noWords);
+		    $string = substr($string, 0, strpos($string, "\n")) . $more;
+		}
+		return $string;
+	}
+
+	public static function get_custom_post_types(){
+
+		$post_types_list = get_post_types();
+		$post_types_arr = array();
+
+		foreach( $post_types_list as $post_type ){
+			if( in_array($post_type, array(
+					'', 
+					// 'post',
+					'page',
+					'solutions',
+					'attachment',
+					'members',
+					'revision',
+					'nav_menu_item',
+					'wp-types-group',
+					'wp-types-user-group'
+				)))
+			{
+				continue;
+			}
+			$post_slug = sanitize_title($post_type);
+			$post_types_arr[$post_slug] = __($post_type, 'wpApp');
+		}
+
+		return $post_types_arr;
+	}
+
 }
 
 

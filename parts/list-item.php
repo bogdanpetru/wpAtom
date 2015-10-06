@@ -1,7 +1,5 @@
 <?php 
 	$img =  wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'full' );
-	$bfi_args = array( 'width'=> 200, 'height'=>133 );
-	$bfi_img = bfi_thumb( $img[0], $bfi_args );
 	$date = get_the_date('d M. Y');
 
 	$has_image = has_post_thumbnail( $post->ID );
