@@ -12,27 +12,29 @@ the_post();
 	<div class="row">
 		
 		<main id="main col-sm-8">
-			<div class="article-header">		
+			<div class="article__header">		
 				<!-- Breadcrumbs -->
 				<?php 
 					if ( function_exists('yoast_breadcrumb') ) {
 						yoast_breadcrumb('<p id="breadcrumbs">','</p>');
 					} 
 				?>
-				<h1 class="article-title"><?php printf( __( 'Rezultatul Cautarilor pentru: %s', '_s' ), '<span>' . get_search_query() . '</span>' ); ?></h1>
+				<h1 class="article__title"><?php printf( __( 'Searched term: %s', '_s' ), '<span>' . get_search_query() . '</span>' ); ?></h1>
 
 				<div class="search-wrapper">
 					<?php get_search_form(); ?>
 				</div>
 			</div>			
 			<!-- .article-header -->
-			<div class="search-loop">
-				<?php if ( have_posts() ) : ?>
-					<?php while ( have_posts() ) : the_post(); ?>
-						<?php get_template_part("parts/list", "item"); ?>
-					<?php endwhile; ?>					
-				<?php else: ?>
-					<h2><?php echo __('Nu a fost gasit nimic.', 'wpApp') ?></h2>
+			<div class="list__loop">
+				<?php 
+					if ( have_posts() ):
+						while ( have_posts() ) : the_post();
+							get_template_part("parts/article", "list");
+						endwhile;
+					else: 
+					?>
+					<h2><?php echo __('Nothing Found.', 'wpApp') ?></h2>
 				<?php endif; ?>
 			</div>
 			<!-- .artocle-body -->		

@@ -15,7 +15,9 @@ the_post();
 		<div class="row">
 			
 			<main id="main col-sm-8">
-				<?php the_content(); ?>
+				<article class="<?php post_class() ?>">
+					<?php the_content(); ?>
+				</article>
 			</main>
 			<!-- main -->
 

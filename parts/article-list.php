@@ -1,12 +1,11 @@
 <?php 
 	$img =  wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'full' );
 	$date = get_the_date('d M. Y');
-
-	$has_image = has_post_thumbnail( $post->ID );
+	$has_image = has_post_thumbnail();
 ?>
 
 
-<div class="list-item <?= $has_image ? 'has-image' : '' ?>">
+<article class="list-article <?= $has_image ? 'has-image' : '' ?>">
 	<div class="row">
 		<?php if( $has_image ): ?>
 		<div class="col-sm-3 img-box">
@@ -20,12 +19,12 @@
 				<span class="date"><?= $date ?> -</span> 
 				<?= substr(strip_tags(get_the_excerpt()), 0, 213); ?>
 			</p>
-			<p class="more">
-				<a href="<?php the_permalink(); ?>" class="button">Detalii</a>
-			</p>
+			<footer>
+				<a href="<?php the_permalink(); ?>" class="button"><?php _e('View More', 'wpApp') ?></a>
+			</footer>
 		</div>
 		<!-- .text-box -->
 	</div>
 	<!-- .row -->
-</div>
+</article>
 <!-- .article-item -->
