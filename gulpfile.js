@@ -9,6 +9,10 @@ var livereload = require('gulp-livereload');
 var notify = require('gulp-notify');
 
 
+// var manifest = require('asset-builder')('./assets/manifest.json');
+//    browserSync = require('browser-sync');
+
+
 
 gulp.task('less', function () {
 

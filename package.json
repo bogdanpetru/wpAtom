@@ -8,14 +8,24 @@
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
+  "devDependencies": {
+    "bootstrap-sass": "^3.3.5",
     "gulp": "^3.8.11",
     "gulp-autoprefixer": "^2.1.0",
-    "gulp-less": "^3.0.1",
     "gulp-livereload": "^3.8.0",
     "gulp-notify": "^2.2.0",
+    "gulp-plumber": "^1.0.0",
     "gulp-sourcemaps": "^1.5.0",
     "gulp-watch": "^4.1.1",
-    "less-plugin-clean-css": "^1.5.0"
+    "less-plugin-clean-css": "^1.5.0",
+    "webpack": "^1.12.2"
+  },
+  "dependencies": {
+    "slick.js": "~1.4.1",
+    "respond-minmax": "~1.4.2",
+    "bootstrap-less": "~3.2.0",
+    "matchHeight": "~0.5.2",
+    "magnific-popup": "~1.0.0",
+    "modernizr-min": "~2.8.3"
   }
 }

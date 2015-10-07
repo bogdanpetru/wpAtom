@@ -3,23 +3,20 @@
 ======================================*/
 
 html, body{
-	font-size: 16px;
+	font-size: 			$base-font-size;
 }
 
 body{
-	color: @text-color;
-	font-family: @font-main;
+	color: 					$text-color;
+	font-family: 		$font-main;
 }
-
-
 
 /*==========  Typo  ==========*/
 
 
 h1, h2, h3, h4, h5, h6{
 
-	a{
-	}
+	a{}
 }
 
 h1{
@@ -51,18 +48,18 @@ blockquote{
 }
 
 ::selection {
-  background: #ffb7b7; /* WebKit/Blink Browsers */
+  background: #ffb7b7;
 }
 ::-moz-selection {
-  background: #ffb7b7; /* Gecko Browsers */
+  background: #ffb7b7;
 }
 
 /*==========  Form  ==========*/
-
 select{}
 
 
 /*==========  Other Elements  ==========*/
 img{
 	max-width: 100%;
+	height: auto;
 }
