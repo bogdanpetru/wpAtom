@@ -6,20 +6,15 @@
 // action name
 // request to admin.php/? actionName
 
-
 function get_team_json(){  
-   return //json;
+   // return json;
 }
 
 function get_team_data() {
-
    if ( !wp_verify_nonce( $_REQUEST['nonce'], "team_nonce")) {
       exit("No naughty business please");
    }   
-
    echo get_team_json();
-
    die();
-
 }
 

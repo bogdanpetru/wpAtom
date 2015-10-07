@@ -1,0 +1,14 @@
+{
+  "require":{
+      "bainternet/Tax-Meta-Class": "*"
+    },
+  "require-dev": {
+      "webdevstudios/cmb2": "master"
+  },
+  "repositories": [
+    {
+        "type": "git",
+        "url": "https://github.com/bainternet/Tax-Meta-Class.git"
+    }
+  ]
+}

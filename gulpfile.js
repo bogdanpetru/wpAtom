@@ -1,81 +1,98 @@
-var less = require('gulp-less');
-var path = require('path');
 var gulp = require('gulp');
-var LessPluginCleanCSS = require('less-plugin-clean-css');
-var cleancss = new LessPluginCleanCSS({ advanced: true });
 var autoprefixer = require('gulp-autoprefixer');
 var sourcemaps = require('gulp-sourcemaps');
 var livereload = require('gulp-livereload');
 var notify = require('gulp-notify');
+var sass = require('gulp-sass');
+var gutil = require('gulp-util');
+var path = require('path');
+var webpackConfig = require("./webpack.config.js");
 
+var webpack = require("webpack");
+var WebpackDevServer = require("webpack-dev-server");
 
-// var manifest = require('asset-builder')('./assets/manifest.json');
-//    browserSync = require('browser-sync');
-
-
+// ## Config
 
 gulp.task('less', function () {
-
   return gulp.src(['./assets/less/main.less'])
     .pipe(sourcemaps.init())
-    .pipe(
-      less()
-      .on("error", notify.onError(function (error) {
-          return "Message to the notifier: " + error.message;
-       }))
-    )
-
+    .pipe( sass().on('error', notifyError) )
     .pipe( sourcemaps.write('./') )
     .pipe( gulp.dest( './assets/css/' ) )
-    .pipe( notify({ 
-          message: 'Successfully compiled LESS',
-          emitError: true
-          })
+    .pipe( notify({ message: 'SASS Done', emitError: true })
     );
-    //.pipe( livereload() );
-
 });
 
 gulp.task('bootstrap', function(){
-
   return gulp.src(['./assets/less/_bootstrap.less'])
     .pipe(less({
       plugins: [cleancss],
     }))
     .pipe( gulp.dest( './assets/css' ) );
+});
 
+gulp.task('webpack', function(callback){
+  var myConfig = Object.create(webpackConfig);
+ 
+  webpack(myConfig, function(err, stats) {
+      if(err) throw new gutil.PluginError("webpack", err);
+      gutil.log("[webpack]", stats.toString({
+          // output options
+      }));
+      callback();
+  });
+  
+});
+
+// ### Webpack goodness
+gulp.task("webpack-dev-server", function(callback) {
+    // Start a webpack-dev-server
+    var compiler = webpack({
+        // configuration
+    });
+
+    new WebpackDevServer(compiler, {
+        // server and middleware options
+    }).listen(8080, "localhost", function(err) {
+        if(err) throw new gutil.PluginError("webpack-dev-server", err);
+        // Server listening
+        gutil.log("[webpack-dev-server]", "http://localhost:8080/webpack-dev-server/index.html");
+
+        // keep the server alive or continue?
+        // callback();
+    });
+});
+
+// ### Images
+gulp.task('images', function() {
+  return gulp.src(globs.images)
+    .pipe(imagemin({
+      progressive: true,
+      interlaced: true,
+      svgoPlugins: [{removeUnknownsAndDefaults: false}, {cleanupIDs: false}]
+    }))
+    .pipe(gulp.dest(path.dist + 'images'))
+    .pipe(browserSync.stream());
 });
 
 gulp.task('dev', function(){
-
-  // Css
-  // livereload.listen(); 
-  gulp.watch('./assets/less/*.less', ['less']);
-  gulp.watch(['./assets/less/_bootstrap.less', './assets/less/_bootstrap_variables.less'], ['bootstrap']);
-  gulp.watch(['*', 'inc/*', 'parts/*'], function(data){
-    gulp.src(data.path)
-      .pipe( livereload() );
-  });
-
 });
 
 gulp.task('dist', ['bootstrap'], function () {
-
-  // Css
-  return gulp.src(['./assets/less/main.less'])
-    .pipe( sourcemaps.init() )
-    .pipe( less() )
-    .pipe( autoprefixer({
-     browsers: ['last 2 versions'],
-     cascade: false
-    }) )
-    .pipe( sourcemaps.write('./assets/css') )
-    .pipe( gulp.dest( './assets/css' ) );
-
+  /**
+   * Todo
+   * - move files to dist
+   * - clean up
+   */
 });
 
 /*==========  Utilities  ==========*/
-function consoleError(error){
-  console.log(error);
-  // this.emmit('end')
+function log(x){
+  console.log(x);
+  return x;
+}
+
+function notifyError (error) {
+  return "Message to the notifier: " + error.message;
+  sass.logError();
 }
