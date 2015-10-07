@@ -1,13 +1,13 @@
-var less = require('gulp-less'),
-    path = require('path'),
-    gulp = require('gulp'),
-    LessPluginCleanCSS = require('less-plugin-clean-css'),
-    cleancss = new LessPluginCleanCSS({ advanced: true }),
-    autoprefixer = require('gulp-autoprefixer'),
-    sourcemaps = require('gulp-sourcemaps'),
-    livereload = require('gulp-livereload'),
-    notify = require('gulp-notify');
-//    browserSync = require('browser-sync');
+var less = require('gulp-less');
+var path = require('path');
+var gulp = require('gulp');
+var LessPluginCleanCSS = require('less-plugin-clean-css');
+var cleancss = new LessPluginCleanCSS({ advanced: true });
+var autoprefixer = require('gulp-autoprefixer');
+var sourcemaps = require('gulp-sourcemaps');
+var livereload = require('gulp-livereload');
+var notify = require('gulp-notify');
+
 
 
 gulp.task('less', function () {
@@ -52,12 +52,6 @@ gulp.task('dev', function(){
     gulp.src(data.path)
       .pipe( livereload() );
   });
-
- //   browserSync({
- //       proxy: "http://tricot.dev/"
- // })
-  
- // gulp.watch("./*").on('change', browserSync.reload);
 
 });
 
