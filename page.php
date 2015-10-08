@@ -6,9 +6,8 @@
  * @author: Bogdan Petru Pintican
  */
 global $wpApp;
-the_post();
+the_post(); 
 ?>
-
 <?php get_header(); ?>
 
 	<div class="container">
@@ -16,7 +15,11 @@ the_post();
 			
 			<main id="main col-sm-8">
 				<article class="<?php post_class() ?>">
-					<?php the_content(); ?>
+					<h1 class="entry-title"><?php the_title(); ?></h1>
+					<div class="entry-content">
+						<?php the_content(); ?>
+					</div>
+					<!-- .entry-content -->
 				</article>
 			</main>
 			<!-- main -->

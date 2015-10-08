@@ -7,20 +7,35 @@ var sass = require('gulp-sass');
 var gutil = require('gulp-util');
 var path = require('path');
 var webpackConfig = require("./webpack.config.js");
+var fs = require('fs');
+var concatStream = require('concat-stream');
 
 var webpack = require("webpack");
 var WebpackDevServer = require("webpack-dev-server");
 
 // ## Config
+var assetsPaths = {
+  sass:{
+    bootstrapSCSS: './node_modules/bootstrap-sass/assets/stylesheets/',
+    src: './src/sass/'
+  }
+};
 
-gulp.task('less', function () {
-  return gulp.src(['./assets/less/main.less'])
-    .pipe(sourcemaps.init())
-    .pipe( sass().on('error', notifyError) )
-    .pipe( sourcemaps.write('./') )
-    .pipe( gulp.dest( './assets/css/' ) )
-    .pipe( notify({ message: 'SASS Done', emitError: true })
-    );
+
+gulp.task('setup', ['moveBootstrapVariables', 'importBootstrap'], function(){
+  // copy _bootstrap.scss and make path corrections
+});
+
+gulp.task('sass', function () {
+  // assetsPaths
+
+  // return gulp.src(['./assets/less/main.less'])
+  //   .pipe(sourcemaps.init())
+  //   .pipe( sass().on('error', notifyError) )
+  //   .pipe( sourcemaps.write('./') )
+  //   .pipe( gulp.dest( './assets/css/' ) )
+  //   .pipe( notify({ message: 'SASS Done', emitError: true })
+  //   );
 });
 
 gulp.task('bootstrap', function(){
@@ -96,3 +111,38 @@ function notifyError (error) {
   return "Message to the notifier: " + error.message;
   sass.logError();
 }
+
+
+gulp.task('moveBootstrapVariables', function(){
+  var varPath = assetsPaths.sass.bootstrapSCSS  + 'bootstrap/_variables.scss';
+  var newVarPath = assetsPaths.sass.src + '/_bootstrap_variables.scss';
+
+  fs.createReadStream(varPath).pipe(
+    fs.createWriteStream(newVarPath)
+  );
+});
+
+gulp.task('importBootstrap', function(){
+  // copy _variables.scss from bootstrap-sass
+  var bootstrapPath = assetsPaths.sass.bootstrapSCSS  + '_bootstrap.scss';
+  var newBootstrapPath = assetsPaths.sass.src + '_bootstrap.scss';
+
+  var newBootstrapPathReadStream = fs.createReadStream(bootstrapPath);
+  var newBootstrapPathWriteStream = fs.createWriteStream(newBootstrapPath);
+
+  newBootstrapPathReadStream
+  .pipe(
+    concatStream(function(fileBuffer){
+      var fileText = fileBuffer.toString();
+      var newText;
+
+      newText = fileText.replace(
+        /bootstrap/ig,
+        assetsPaths.sass.bootstrapSCSS  + 'bootstrap'
+      );
+
+      newBootstrapPathWriteStream.write(newText);
+      newBootstrapPathWriteStream.close();
+    })
+  );
+});

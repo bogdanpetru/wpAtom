@@ -1,1 +1,1 @@
-<h1>404 Pagina nu a fost găsită</h1>
+<h1><?php _e('404 Page not Found', 'wpApp') ?></h1>
