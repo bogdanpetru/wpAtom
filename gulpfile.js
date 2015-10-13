@@ -13,13 +13,30 @@ var concatStream = require('concat-stream');
 var webpack = require("webpack");
 var WebpackDevServer = require("webpack-dev-server");
 
+
+/**
+ * TODO
+ * - add dist task
+ * - img compression
+ * - minify + uglify css and js
+ */
+
 // ## Config
-var assetsPaths = {
-  sass:{
-    bootstrapSCSS: './node_modules/bootstrap-sass/assets/stylesheets/',
-    src: './src/sass/'
+var assets = {
+  css:{
+    src: './src/sass/',
+    dist: './dist/css/',
+    vendor: {
+      bootstrapSrc : './node_modules/bootstrap-sass/assets/stylesheets/'
+    },
   }
 };
+
+var config = {
+  sass: {
+    outputStyle: 'expanded'
+  }
+}
 
 
 gulp.task('setup', ['moveBootstrapVariables', 'importBootstrap'], function(){
@@ -27,33 +44,32 @@ gulp.task('setup', ['moveBootstrapVariables', 'importBootstrap'], function(){
 });
 
 gulp.task('sass', function () {
-  // assetsPaths
-
-  // return gulp.src(['./assets/less/main.less'])
-  //   .pipe(sourcemaps.init())
-  //   .pipe( sass().on('error', notifyError) )
-  //   .pipe( sourcemaps.write('./') )
-  //   .pipe( gulp.dest( './assets/css/' ) )
-  //   .pipe( notify({ message: 'SASS Done', emitError: true })
-  //   );
+  return gulp.src( './src/sass/main.scss' )
+    .pipe( sass(config.sass).on('error', sass.logError ) )
+    .pipe( sourcemaps.init() )
+    .pipe( autoprefixer() )
+    .pipe( sourcemaps.write( assets.css.dist ) )
+    .pipe( gulp.dest('./') ) 
+    .pipe( livereload() )
+    .pipe( notify({ message: 'SASS Done', emitError: true }));
 });
 
 gulp.task('bootstrap', function(){
-  return gulp.src(['./assets/less/_bootstrap.less'])
-    .pipe(less({
-      plugins: [cleancss],
-    }))
-    .pipe( gulp.dest( './assets/css' ) );
+  return gulp.src( assets.css.src + 'bootstrap.scss' )
+    .pipe( sass(config.sass) )
+    .pipe( gulp.dest( assets.css.dist ) )
+    .pipe( notify({ message: 'Bootstrap Done', emitError: true }));
 });
 
 gulp.task('webpack', function(callback){
   var myConfig = Object.create(webpackConfig);
  
-  webpack(myConfig, function(err, stats) {
-      if(err) throw new gutil.PluginError("webpack", err);
-      gutil.log("[webpack]", stats.toString({
-          // output options
-      }));
+  webpack(myConfig, 
+      function(err, stats) {
+        if(err) throw new gutil.PluginError("webpack", err);
+        gutil.log("[webpack]", stats.toString({
+            // output options
+        }));
       callback();
   });
   
@@ -90,7 +106,10 @@ gulp.task('images', function() {
     .pipe(browserSync.stream());
 });
 
-gulp.task('dev', function(){
+gulp.task('dev', ['bootstrap', 'sass', 'webpack'], function(){
+  livereload.listen();
+  // gulp.watch( assets.css.src + '/**/*.scss')
+  // .on('change', )
 });
 
 gulp.task('dist', ['bootstrap'], function () {
@@ -114,8 +133,8 @@ function notifyError (error) {
 
 
 gulp.task('moveBootstrapVariables', function(){
-  var varPath = assetsPaths.sass.bootstrapSCSS  + 'bootstrap/_variables.scss';
-  var newVarPath = assetsPaths.sass.src + '/_bootstrap_variables.scss';
+  var varPath = assets.css.vendor.bootstrapSrc  + 'bootstrap/_variables.scss';
+  var newVarPath = assets.css.src + '/common/_bootstrap_variables.scss';
 
   fs.createReadStream(varPath).pipe(
     fs.createWriteStream(newVarPath)
@@ -124,8 +143,8 @@ gulp.task('moveBootstrapVariables', function(){
 
 gulp.task('importBootstrap', function(){
   // copy _variables.scss from bootstrap-sass
-  var bootstrapPath = assetsPaths.sass.bootstrapSCSS  + '_bootstrap.scss';
-  var newBootstrapPath = assetsPaths.sass.src + '_bootstrap.scss';
+  var bootstrapPath = assets.css.vendor.bootstrapSrc + '_bootstrap.scss';
+  var newBootstrapPath = assets.css.src + 'bootstrap.scss';
 
   var newBootstrapPathReadStream = fs.createReadStream(bootstrapPath);
   var newBootstrapPathWriteStream = fs.createWriteStream(newBootstrapPath);
@@ -138,7 +157,7 @@ gulp.task('importBootstrap', function(){
 
       newText = fileText.replace(
         /bootstrap/ig,
-        assetsPaths.sass.bootstrapSCSS  + 'bootstrap'
+        assets.css.vendor.bootstrapSrc  + 'bootstrap'
       );
 
       newBootstrapPathWriteStream.write(newText);

@@ -1,11 +1,9 @@
 <?php 
-
-
 /**
  *
- *  @author [author] Bogdan Petru Pintican
- *  @author [email] bogdanpintican@gmail.com
- *  @package [name] wpApp
+ *  @author Bogdan Petru Pintican
+ *  @link  bogdanpintican@gmail.com
+ *  @package wpApp
  *  
  * 
  */
@@ -101,9 +99,10 @@ class wpApp {
 		$post_types_list = get_post_types();
 		$post_types_arr = array();
 		foreach( $post_types_list as $post_type ){
-			if( in_array($post_type, array() ){
+			if( in_array($post_type, array('post')) ) {
 				continue;
 			}
+			
 			$post_slug = sanitize_title($post_type);
 			$post_types_arr[$post_slug] = __($post_type, 'wpApp');
 		}

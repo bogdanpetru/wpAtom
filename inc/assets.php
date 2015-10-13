@@ -19,9 +19,9 @@ function wpApp_register_scripts_and_styles() {
     wp_register_script('fontAwesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css');
 
     //!wp_register_style( $handle, $src, $deps, $ver, $media );
-    wp_register_style('bootstrap', $theme_uri . '/dist/bootstrap.css');
-    wp_register_style('wpAppCss', $theme_uri . '/dist/app.css');
-    wp_register_style('wpAppIe8', $theme_uri . '/dist/ie8.css');
+    wp_register_style('bootstrap', $theme_uri . '/dist/css/bootstrap.css');
+    wp_register_style('wpAppCss', $theme_uri . '/dist/css/main.css');
+    wp_register_style('wpAppIe8', $theme_uri . '/dist/css/ie8.css');
 
 }
 add_action( 'wp_enqueue_scripts', 'wpApp_register_scripts_and_styles' );

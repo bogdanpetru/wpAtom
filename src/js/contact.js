@@ -1,27 +1,30 @@
 import $ from 'jQuery';
+import google from 'google-maps';
+
+console.log(google);
 
 var mapCanvas = document.getElementById('map-canvas');
 var $mapCanvas = $(mapCanvas);
 var adress = $mapCanvas.data('adress');
 
-var  mapOptions = { zoom: 16 }
+// var  mapOptions = { zoom: 16 }
 
-var geocoder = new google.maps.Geocoder();
-var map;
-var marker;
-var center;
+// var geocoder = new google.maps.Geocoder();
+// var map;
+// var marker;
+// var center;
 
 
-geocoder.geocode({
-  address: adress
-}, function(results, status) {
-  if (status == google.maps.GeocoderStatus.OK) {
-    center = results[0].geometry.location;
-    initializeMap();
-  } else {
-    console.log("Geocode was not successful for the following reason: " + status);
-  }
-});
+// geocoder.geocode({
+//   address: adress
+// }, function(results, status) {
+//   if (status == google.maps.GeocoderStatus.OK) {
+//     center = results[0].geometry.location;
+//     initializeMap();
+//   } else {
+//     console.log("Geocode was not successful for the following reason: " + status);
+//   }
+// });
 
 
 function initializeMap(){

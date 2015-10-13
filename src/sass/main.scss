@@ -1,0 +1,25 @@
+@import "./utils/_utility";
+// common
+@import "./common/_bootstrap_variables";
+@import "./common/_variables";
+@import "./common/_base";
+@import "./common/_forms";
+
+
+// layout
+@import "./layout/_header";
+@import "./layout/_footer";
+
+// components
+@import "./components/_icons";
+@import "./components/_lists";
+@import "./components/_pagination";
+
+// modifiers and bw fixes
+@import "./other/_bw-fixes";
+
+
+body{
+  color: red;
+  background: green;
+}
