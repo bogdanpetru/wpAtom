@@ -56,8 +56,9 @@
 
 	var _contactJs2 = _interopRequireDefault(_contactJs);
 
-	var app = {};
-	console.log('test');
+	var app = app || {};
+
+	app.init = function () {};
 
 /***/ },
 /* 1 */
@@ -68,7 +69,6 @@
 	Object.defineProperty(exports, '__esModule', {
 	  value: true
 	});
-	exports.contactMap = contactMap;
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -80,49 +80,43 @@
 
 	var _googleMaps2 = _interopRequireDefault(_googleMaps);
 
-	console.log(_googleMaps2['default']);
-
 	var mapCanvas = document.getElementById('map-canvas');
 	var $mapCanvas = (0, _jQuery2['default'])(mapCanvas);
 	var adress = $mapCanvas.data('adress');
+	var mapOptions = { zoom: 16 };
+	var geocoder = new _googleMaps2['default'].maps.Geocoder();
 
-	// var  mapOptions = { zoom: 16 }
+	function init() {
+	  geocoder.geocode({
+	    address: adress
+	  }, function (results, status) {
+	    if (status == _googleMaps2['default'].maps.GeocoderStatus.OK) {
+	      center = results[0].geometry.location;
+	      initializeMap(center);
+	    } else {
+	      console.log("Geocode was not successful for the following reason: " + status);
+	    }
+	  });
+	}
 
-	// var geocoder = new google.maps.Geocoder();
-	// var map;
-	// var marker;
-	// var center;
-
-	// geocoder.geocode({
-	//   address: adress
-	// }, function(results, status) {
-	//   if (status == google.maps.GeocoderStatus.OK) {
-	//     center = results[0].geometry.location;
-	//     initializeMap();
-	//   } else {
-	//     console.log("Geocode was not successful for the following reason: " + status);
-	//   }
-	// });
-
-	function initializeMap() {
+	function initializeMap(center) {
 
 	  mapOptions.center = center;
-	  map = new _googleMaps2['default'].maps.Map(mapCanvas, mapOptions);
+	  var map = new _googleMaps2['default'].maps.Map(mapCanvas, mapOptions);
 
-	  // Marker
-	  marker = new MarkerWithLabel({
+	  var marker = new MarkerWithLabel({
 	    position: center,
 	    map: map,
 	    labelContent: "58 rue César Geoffray",
 	    labelAnchor: new _googleMaps2['default'].maps.Point(22, 0),
 	    labelClass: "labels"
 	  });
+
 	  marker.setMap(map);
 	}
 
-	function contactMap() {
-	  return 'hello world';
-	}
+	exports['default'] = init;
+	module.exports = exports['default'];
 
 /***/ },
 /* 2 */

@@ -3,6 +3,8 @@
 //
 
 import contactMap from './contact.js';
+var app = app || {};
 
-var app = {};
-console.log('test');
+app.init = function(){
+
+};

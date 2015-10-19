@@ -1,18 +1,15 @@
 var gulp = require('gulp');
 var autoprefixer = require('gulp-autoprefixer');
 var sourcemaps = require('gulp-sourcemaps');
-var livereload = require('gulp-livereload');
 var notify = require('gulp-notify');
 var sass = require('gulp-sass');
 var gutil = require('gulp-util');
 var path = require('path');
-var webpackConfig = require("./webpack.config.js");
 var fs = require('fs');
 var concatStream = require('concat-stream');
 
-var webpack = require("webpack");
-var WebpackDevServer = require("webpack-dev-server");
-
+var browserSync = require('browser-sync').create();
+var bs;
 
 /**
  * TODO
@@ -22,6 +19,7 @@ var WebpackDevServer = require("webpack-dev-server");
  */
 
 // ## Config
+
 var assets = {
   css:{
     src: './src/sass/',
@@ -29,19 +27,35 @@ var assets = {
     vendor: {
       bootstrapSrc : './node_modules/bootstrap-sass/assets/stylesheets/'
     },
+  },
+  js:{
+    dist: './dist/js/'
+  },
+  img{
+    src: './src/img/'
+    dist: './dist/img/'
   }
 };
 
 var config = {
   sass: {
     outputStyle: 'expanded'
+  },
+
+  browserSync: {
+    proxy: "http://wp.dev/",
   }
 }
-
 
 gulp.task('setup', ['moveBootstrapVariables', 'importBootstrap'], function(){
   // copy _bootstrap.scss and make path corrections
 });
+
+gulp.task('browserSync', function(){
+    browserSync.init(
+      config.browserSync
+    );
+})
 
 gulp.task('sass', function () {
   return gulp.src( './src/sass/main.scss' )
@@ -49,10 +63,10 @@ gulp.task('sass', function () {
     .pipe( sourcemaps.init() )
     .pipe( autoprefixer() )
     .pipe( sourcemaps.write( assets.css.dist ) )
-    .pipe( gulp.dest('./') ) 
-    .pipe( livereload() )
+    .pipe( gulp.dest( assets.css.dist ) ) 
+    .pipe( browserSync.stream() )
     .pipe( notify({ message: 'SASS Done', emitError: true }));
-});
+;});
 
 gulp.task('bootstrap', function(){
   return gulp.src( assets.css.src + 'bootstrap.scss' )
@@ -61,63 +75,43 @@ gulp.task('bootstrap', function(){
     .pipe( notify({ message: 'Bootstrap Done', emitError: true }));
 });
 
-gulp.task('webpack', function(callback){
-  var myConfig = Object.create(webpackConfig);
- 
-  webpack(myConfig, 
-      function(err, stats) {
-        if(err) throw new gutil.PluginError("webpack", err);
-        gutil.log("[webpack]", stats.toString({
-            // output options
-        }));
-      callback();
-  });
-  
-});
-
-// ### Webpack goodness
-gulp.task("webpack-dev-server", function(callback) {
-    // Start a webpack-dev-server
-    var compiler = webpack({
-        // configuration
-    });
-
-    new WebpackDevServer(compiler, {
-        // server and middleware options
-    }).listen(8080, "localhost", function(err) {
-        if(err) throw new gutil.PluginError("webpack-dev-server", err);
-        // Server listening
-        gutil.log("[webpack-dev-server]", "http://localhost:8080/webpack-dev-server/index.html");
-
-        // keep the server alive or continue?
-        // callback();
-    });
-});
 
 // ### Images
 gulp.task('images', function() {
-  return gulp.src(globs.images)
+  return gulp.src(assets.img.src)
     .pipe(imagemin({
       progressive: true,
       interlaced: true,
       svgoPlugins: [{removeUnknownsAndDefaults: false}, {cleanupIDs: false}]
     }))
-    .pipe(gulp.dest(path.dist + 'images'))
+    .pipe(gulp.dest(assets.img.dest))
     .pipe(browserSync.stream());
 });
 
-gulp.task('dev', ['bootstrap', 'sass', 'webpack'], function(){
-  livereload.listen();
-  // gulp.watch( assets.css.src + '/**/*.scss')
-  // .on('change', )
+gulp.task('dev', ['browserSync', 'bootstrap', 'sass'], function(){
+
+  gulp.watch( assets.css.src + '**/**', ['sass']);
+  gulp.watch( [assets.js.dist + '**'], browserSync.reload);
+  gulp.watch( ['./**.php', './inc/**.php', './parts/**.php', './content/**.php'], browserSync.reload);
 });
 
-gulp.task('dist', ['bootstrap'], function () {
+gulp.task('dist', ['scss', 'images', 'bootstrap'], function () {
   /**
    * Todo
    * - move files to dist
    * - clean up
    */
+  gulp.src([
+      './content',
+      './inc',
+      './dist',
+      './parts',
+      './vendor',
+      './*.php',
+      './readme.md',
+      './*.css',
+    ])
+    .pipe(gulp.dest('../wpAppDist/'));
 });
 
 /*==========  Utilities  ==========*/

@@ -96,7 +96,8 @@ img {
 =            IE Fixes: ;            =
 =====================================*/
 body {
-  background: yellow;
+  color: red;
+  background: green;
 }
 
 /*# sourceMappingURL=dist/css/main.css.map */
