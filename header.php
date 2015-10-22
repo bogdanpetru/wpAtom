@@ -1,9 +1,9 @@
 <?php 
 /**
- * @package wpApp
+ * @package wpAtom
  * @author: Bogdan Petru Pintican
  */
-global $wpApp;
+global $wpAtom;
 ?><!DOCTYPE html>
 <html class="no-js" <?php language_attributes(); ?>>
 <head>

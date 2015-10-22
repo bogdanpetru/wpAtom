@@ -2,10 +2,10 @@
 /**
  * Template Name: Name of themplate
  * @name Simple Page Template
- * @package wpApp
+ * @package wpAtom
  * @author: Bogdan Petru Pintican
  */
-global $wpApp;
+global $wpAtom;
 the_post(); 
 ?>
 

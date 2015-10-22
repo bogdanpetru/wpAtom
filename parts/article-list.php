@@ -20,7 +20,7 @@
 				<?= substr(strip_tags(get_the_excerpt()), 0, 213); ?>
 			</p>
 			<footer>
-				<a href="<?php the_permalink(); ?>" class="button"><?php _e('View More', 'wpApp') ?></a>
+				<a href="<?php the_permalink(); ?>" class="button"><?php _e('View More', 'wpAtom') ?></a>
 			</footer>
 		</div>
 		<!-- .text-box -->

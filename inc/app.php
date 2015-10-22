@@ -3,12 +3,12 @@
  *
  *  @author Bogdan Petru Pintican
  *  @link  bogdanpintican@gmail.com
- *  @package wpApp
+ *  @package wpAtom
  *  
  * 
  */
 
-class wpApp {
+class wpAtom {
 
 	/**
 	 * Gets formated rss feed
@@ -104,7 +104,7 @@ class wpApp {
 			}
 			
 			$post_slug = sanitize_title($post_type);
-			$post_types_arr[$post_slug] = __($post_type, 'wpApp');
+			$post_types_arr[$post_slug] = __($post_type, 'wpAtom');
 		}
 
 		return $post_types_arr;
@@ -118,14 +118,14 @@ class wpApp {
     if (get_option('page_for_posts', true)) {
       return get_the_title(get_option('page_for_posts', true));
     } else {
-      return __('Latest Posts', 'wpApp');
+      return __('Latest Posts', 'wpAtom');
     }
   } elseif (is_archive()) {
     return get_the_archive_title();
   } elseif (is_search()) {
-    return sprintf(__('Search Results for %s', 'wpApp'), get_search_query());
+    return sprintf(__('Search Results for %s', 'wpAtom'), get_search_query());
   } elseif (is_404()) {
-    return __('Not Found', 'wpApp');
+    return __('Not Found', 'wpAtom');
   } else {
     return get_the_title();
   }

@@ -111,7 +111,7 @@ gulp.task('dist', ['scss', 'images', 'bootstrap'], function () {
       './readme.md',
       './*.css',
     ])
-    .pipe(gulp.dest('../wpAppDist/'));
+    .pipe(gulp.dest('../wpAtomDist/'));
 });
 
 /*==========  Utilities  ==========*/

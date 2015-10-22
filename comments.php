@@ -1,6 +1,6 @@
 <?php 
 /**
- * @package wpApp
+ * @package wpAtom
  * @author: Bogdan Petru Pintican
  */
 if (post_password_required()) {
@@ -17,7 +17,7 @@ if (post_password_required()) {
                 '%1$s responses to &ldquo;%2$s&rdquo;', 
                 get_comments_number(), 
                 'comments title', 
-                'wpApp'
+                'wpAtom'
                 ), 
                 number_format_i18n(get_comments_number()), '<span>' . get_the_title() . '</span>'
             ); 
@@ -33,7 +33,7 @@ if (post_password_required()) {
 
   <?php if (!comments_open() && get_comments_number() != '0' && post_type_supports(get_post_type(), 'comments')) : ?>
     <div class="alert">
-      <?php _e('Comments are closed.', 'wpApp'); ?>
+      <?php _e('Comments are closed.', 'wpAtom'); ?>
     </div>
   <?php endif; ?>
 

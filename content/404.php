@@ -1,1 +1,1 @@
-<h1><?php _e('404 Page not Found', 'wpApp') ?></h1>
+<h1><?php _e('404 Page not Found', 'wpAtom') ?></h1>

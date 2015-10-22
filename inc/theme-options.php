@@ -4,9 +4,9 @@
      * For full documentation, please visit: http://docs.reduxframework.com/
      */
 
-    if ( ! class_exists( 'wpApp_options' ) ) {
+    if ( ! class_exists( 'wpAtom_options' ) ) {
 
-        class wpApp_options {
+        class wpAtom_options {
 
             public $args = array();
             public $sections = array();
@@ -456,9 +456,9 @@
         }
 
         global $reduxConfig;
-        $reduxConfig = new wpApp_options();
+        $reduxConfig = new wpAtom_options();
     } else {
-        echo "The class named wpApp_options has already been called. <strong>Developers, you need to prefix this class with your company name or you'll run into problems!</strong>";
+        echo "The class named wpAtom_options has already been called. <strong>Developers, you need to prefix this class with your company name or you'll run into problems!</strong>";
     }
 
     /**

@@ -9,16 +9,16 @@ add_filter('show_admin_bar', '__return_false');
 
 /*==========  Register Menus  ==========*/
 register_nav_menus( array(
-    'primary' => __( 'Primary Menu',      'wpApp' ),
-    'social'  => __( 'Social Links Menu', 'wpApp' ),
+    'primary' => __( 'Primary Menu',      'wpAtom' ),
+    'social'  => __( 'Social Links Menu', 'wpAtom' ),
 ) );
 
 
 /*==========  Register Sidebars  ==========*/
 register_sidebar( array(
-    'name' => __( 'Sidebar', 'wpApp' ),
+    'name' => __( 'Sidebar', 'wpAtom' ),
     'id' => 'sidebar',
-    'description' => __( 'Gemeroc Sodebar.', 'wpApp' ),
+    'description' => __( 'Gemeroc Sodebar.', 'wpAtom' ),
     'class'         => 'sidebar sidebar-1',
     'before_widget' => '<div id="%1$s" class="widget %2$s">',
     'after_widget'  => '</div>',

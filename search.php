@@ -1,10 +1,10 @@
 <?php 
 /**
  * @name Search
- * @package wpApp
+ * @package wpAtom
  * @author: Bogdan Petru Pintican
  */
-global $wpApp;
+global $wpAtom;
 the_post();
 ?>
 <?php get_header(); ?>
@@ -34,7 +34,7 @@ the_post();
 						endwhile;
 					else: 
 					?>
-					<h2><?php echo __('Nothing Found.', 'wpApp') ?></h2>
+					<h2><?php echo __('Nothing Found.', 'wpAtom') ?></h2>
 				<?php endif; ?>
 			</div>
 			<!-- .artocle-body -->		

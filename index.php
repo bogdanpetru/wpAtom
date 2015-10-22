@@ -1,9 +1,9 @@
 <?php 
 /**
- * @package wpApp
+ * @package wpAtom
  * @author: Bogdan Petru Pintican
  */
-global $wpApp;
+global $wpAtom;
 
 get_header();
 ?>
