@@ -1,6 +1,6 @@
 sftp-config.json
 assets/css/main.css
 assets/css/main.css.map
-node_modules
-vendor
+node_modules/
+vendor/
 dist

@@ -95,8 +95,5 @@ img {
 @-moz-document url-prefix() {}/*=====================================
 =            IE Fixes: ;            =
 =====================================*/
-body {
-  background: yellow;
-}
 
 /*# sourceMappingURL=dist/css/main.css.map */

@@ -1,5 +1,5 @@
 import $ from 'jQuery';
-import google from 'google-maps';
+// import google from 'google-maps';
 
 
 let mapCanvas = document.getElementById('map-canvas');

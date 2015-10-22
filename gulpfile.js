@@ -31,8 +31,8 @@ var assets = {
   js:{
     dist: './dist/js/'
   },
-  img{
-    src: './src/img/'
+  img:{
+    src: './src/img/',
     dist: './dist/img/'
   }
 };
