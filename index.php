@@ -8,7 +8,7 @@ global $wpAtom;
 get_header();
 ?>
 	<div class="container">
-		<div class="row">
+		<div class="row"> 
 			
 			<main id="main" role="main" class="content col-sm-8">
 
