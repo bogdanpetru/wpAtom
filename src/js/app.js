@@ -3,8 +3,11 @@
 //
 
 import contactMap from './contact.js';
-var app = app || {};
+import { isElementInViewport } from './utils.js';
 
-app.init = function(){
+var app = app || {
+  init: {
+    
+  }
 
 };
