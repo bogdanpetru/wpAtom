@@ -6,7 +6,6 @@ import contactMap from './contact.js';
 import { isElementInViewport } from './utils.js';
 import $ from 'jQuery';
 
-
 class WpAtom{
 
   constructor(){
@@ -27,6 +26,7 @@ class WpAtom{
   }
 
   init(){
+    contactMap.init();
   }
   
   resize(){
@@ -37,4 +37,3 @@ class WpAtom{
 }
 
 let wpAtom = new WpAtom();
-

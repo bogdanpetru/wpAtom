@@ -5,17 +5,18 @@ import GoogleMapsLoader from 'google-maps';
 var contactMap = {
 
   init: () => {
-    GoogleMapsLoader.load(this.contactMap.start);
+    GoogleMapsLoader.load(contactMap.start);
   },
 
   start: (google) => {    
     let mapCanvas = document.getElementById('map-canvas');
     let $mapCanvas = $(mapCanvas);
-    let adress = $mapCanvas.data('adress');
+    let adress = $mapCanvas.data('adress') || 'Cluj-Napoca, Romania';
     let mapOptions = { zoom: 16 }
     let geocoder = new google.maps.Geocoder();
+    let map = new google.maps.Map( mapCanvas, mapOptions);
 
-    this.map = new google.maps.Map( mapCanvas, mapOptions);
+    contactMap.map = map;
   
     geocoder.geocode({
       address: adress

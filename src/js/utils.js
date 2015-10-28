@@ -1,4 +1,4 @@
-export function isElementInViewport (el) {
+export function isElementInViewport (el){
     var rect = el.getBoundingClientRect();
 
     return (

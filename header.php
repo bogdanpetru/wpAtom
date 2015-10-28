@@ -31,7 +31,7 @@ global $wpAtom;
 		<div class="row">
 			<div class="logo col-sm-3">
 				<h1>
-					<img src="<?php bloginfo('stylesheet_directory') ?>/assets/img/logo.jpg">
+					Logo
 				</h1>
 			</div>
 		</div>
