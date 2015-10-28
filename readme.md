@@ -16,3 +16,4 @@
 ###TODO:
 - merge css and js tasks
 - make dist task
+- add post css + css lint

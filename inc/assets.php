@@ -7,7 +7,7 @@ function wpAtom_register_scripts_and_styles() {
     // Register
     //!wp_register_script( $handle, $src, $deps, $ver, $in_footer );
     wp_register_script('googleMaps', 'https://maps.googleapis.com/maps/api/js?v=3.exp', array(), 3);
-    wp_register_script('wpAtomJs', $theme_uri . '/dist/bundle.js', array(), 3);
+    wp_register_script('wpAtomJs', $theme_uri . '/dist/js/bundle.js', array(), 3);
     // google fonts
     $google_fonts = array(
       'open-sans' => 'http://fonts.googleapis.com/css?family=Roboto:600,400,300,300italic,700,700italic,900'
@@ -30,11 +30,7 @@ function wpAtom_enquire_scripts_and_styles() {
     // wp_enqueue_style( $handle, $src, $deps, $ver, $media );
 
     // scripts
-    wp_enqueue_script( 'wpAtomJs', false, array('google-maps') );
-    wp_enqueue_script( 'jquery' );
-    // wp_enqueue_script( 'jquery-ui-widget' );
-    // wp_enqueue_script( 'jquery-ui-slider' );
-    // wp_enqueue_script( 'jquery-ui-selectmenu' );
+   wp_enqueue_script( 'wpAtomJs', false, array() );
 
     // styles
     wp_enqueue_style( 'wpAtomCss', false, array(), 0.1 );
