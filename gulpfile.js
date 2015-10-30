@@ -62,7 +62,7 @@ gulp.task('sass', function () {
     .pipe( sass(config.sass).on('error', sass.logError ) )
     .pipe( sourcemaps.init() )
     .pipe( autoprefixer() )
-    .pipe( sourcemaps.write( assets.css.dist ) )
+    .pipe( sourcemaps.write( './' ) )
     .pipe( gulp.dest( assets.css.dist ) ) 
     .pipe( browserSync.stream() )
     .pipe( notify({ message: 'SASS Done', emitError: true }));

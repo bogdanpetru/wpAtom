@@ -1,10 +1,10 @@
 //
 // ES6 baby!!
 //
-
 import contactMap from './contact.js';
 import { isElementInViewport } from './utils.js';
-import $ from 'jQuery';
+import $ from 'jquery';
+import matchHeight from 'jquery-match-height';
 
 class WpAtom{
 
@@ -16,13 +16,12 @@ class WpAtom{
   setupjQueryNodes(){
     this.$document = $(document);
     this.$window = $(window);
-
   }
 
   setupEvents(){
     this.$document.on('ready', this.init);
     this.$window.on('resize', this.resize);
-    this.$window.load(this.load);
+    this.$window.load(this.load.bind(this));
   }
 
   init(){
@@ -30,10 +29,21 @@ class WpAtom{
   }
   
   resize(){
+
   }
 
   load(){
+    this.makeEqualHeight([
+        '.box'
+      ]);
+  }
+
+  makeEqualHeight(selectors){
+    selectors.forEach( selector => {
+      $(selector).matchHeight();
+    })
   }
 }
+
 
 let wpAtom = new WpAtom();

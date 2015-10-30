@@ -15,5 +15,7 @@
 
 ###TODO:
 - merge css and js tasks
-- make dist task
-- add post css + css lint
+- make dest task
+- add postCss + css lint
+- add rest api
+- add srcset

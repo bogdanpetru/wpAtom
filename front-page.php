@@ -1,8 +1,8 @@
 <?php 
 /**
- * Template Name: Name of themplate
  * @name Simple Page Template
- * @package wpAtom
+ * @package WordPress
+ * @subpackage wpAtom
  * @author: Bogdan Petru Pintican
  */
 global $wpAtom;
@@ -18,6 +18,12 @@ the_post();
           <h1 class="entry-title"><?php the_title(); ?></h1>
           <div class="entry-content">
             <?php the_content(); ?>
+          
+             <div class="box"> Box </div>  
+             <div class="box"> Box </div>  
+             <div class="box"> Box </div>  
+             <div class="box"> Box </div>  
+             <div class="box"> Box </div>  
           </div>
           <!-- .entry-content -->
           <div id="map-canvas"></div>

@@ -1,0 +1,15 @@
+/*===========================================
+=            Shame, shame, shame            =
+===========================================*/
+
+.box{
+  width: 100px;
+  background: red;
+  float: left;
+  margin-right: 10px;
+
+}
+
+.box:first-of-type{
+  height: 300px;
+}

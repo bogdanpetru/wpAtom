@@ -7,21 +7,16 @@
  * @author: Bogdan Petru Pintican
  */
 global $wpAtom;
-the_post(); 
+the_post();
 ?>
+
 <?php get_header(); ?>
 
 	<div class="container">
 		<div class="row">
 			
 			<main id="main col-sm-8">
-				<article class="<?php post_class() ?>">
-					<h1 class="entry-title"><?php the_title(); ?></h1>
-					<div class="entry-content">
-						<?php the_content(); ?>
-					</div>
-					<!-- .entry-content -->
-				</article>
+				<?php the_content(); ?>
 			</main>
 			<!-- main -->
 

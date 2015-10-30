@@ -25,7 +25,8 @@ module.exports = {
   resolve: {
     alias: {
       // Bind version of jquery
-      jquery: "jquery-2.0.3",
+      'jquery': "jquery",
+      'jQuery': "jquery",
 
       // Bind version of jquery-ui
       "jquery-ui": "jquery-ui-1.10.3",

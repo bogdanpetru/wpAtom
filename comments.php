@@ -1,6 +1,7 @@
 <?php 
 /**
- * @package wpAtom
+ * @package WordPress
+ * @subpackage wpAtom
  * @author: Bogdan Petru Pintican
  */
 if (post_password_required()) {

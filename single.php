@@ -2,7 +2,8 @@
 /**
  * Template Name: Name of themplate
  * @name Simple Page Template
- * @package wpAtom
+ * @package WordPress
+ * @subpackage wpAtom
  * @author: Bogdan Petru Pintican
  */
 global $wpAtom;

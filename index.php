@@ -1,39 +1,37 @@
 <?php 
 /**
- * @package wpAtom
+ * @name Simple Page Template
+ * @package WordPress
+ * @subpackage wpAtom
  * @author: Bogdan Petru Pintican
  */
 global $wpAtom;
-
-get_header();
+the_post(); 
 ?>
-	<div class="container">
-		<div class="row"> 
-			
-			<main id="main" role="main" class="content col-sm-8">
+<?php get_header(); ?>
 
-				<?php if( have_posts() ): ?>
-					<h1 class="page-title"><?php the_title(); ?></h1>
-				<?php
-					
-					while( have_posts() ):
-						get_template_part('content/', get_post_format() );
-					endwhile;	
+  <div class="container">
+    <div class="row">
+      
+      <main id="main col-sm-8">
+        <article class="<?php post_class() ?>">
+          <h1 class="entry-title"><?php the_title(); ?></h1>
+          <div class="entry-content">
+            <?php the_content(); ?>
+          </div>
+          <!-- .entry-content -->
+          <div id="map-canvas"></div>
+        </article>
+      </main>
+      <!-- main -->
 
-				else: 
-					get_template_part('content/404');
-				?>
+      <aside class="col-sm-4">
+        <?php get_sidebar(); ?>
+      </aside>
 
-			</main>
-			<!-- main -->
-
-			<aside role="aside" class="aside col-sm-4">
-				<?php get_sidebar(); ?>
-			</aside>
-
-		</div>
-		<!-- .row -->
-	</div>
-	<!-- .container -->
+    </div>
+    <!-- .row -->
+  </div>
+  <!-- .container -->
 
 <?php get_footer(); ?>

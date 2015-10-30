@@ -1,7 +1,8 @@
 <?php 
 /**
  * @name Search
- * @package wpAtom
+ * @package WordPress
+ * @subpackage wpAtom
  * @author: Bogdan Petru Pintican
  */
 global $wpAtom;
