@@ -19,3 +19,5 @@
 - add postCss + css lint
 - add rest api
 - add srcset
+- clean up parts
+- figure out how to manage layout templates
