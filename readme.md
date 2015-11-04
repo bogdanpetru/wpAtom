@@ -13,9 +13,10 @@
 - gulp dev
 - webpack
 
+### Dist
+- gulp dist --themeName themeName
+
 ###TODO:
-- merge css and js tasks
-- make dest task
 - add postCss + css lint
-- add rest api
 - add srcset
+- improve pageload  ( over 90 on google speed test )

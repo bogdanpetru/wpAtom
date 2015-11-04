@@ -54,6 +54,12 @@ function wpAtom_register_required_plugins() {
       'required'  => false,
     ),
 
+    array(
+      'name'      => 'RICG Responsive Images',
+      'slug'      => 'ricg-responsive-images',
+      'required'  => false,
+    ),
+
 
 
   );

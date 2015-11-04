@@ -7,9 +7,12 @@ var gutil = require('gulp-util');
 var path = require('path');
 var fs = require('fs');
 var concatStream = require('concat-stream');
+var imagemin= require('gulp-imagemin');
 
 var browserSync = require('browser-sync').create();
 var bs;
+
+var argv = require('yargs').argv;
 
 /**
  * TODO
@@ -32,21 +35,21 @@ var assets = {
     dist: './dist/js/'
   },
   img:{
-    src: './src/img/',
+    src: './src/img/*',
     dist: './dist/img/'
   }
 };
 
 var config = {
+  dist: false,
   sass: {
-    outputStyle: 'expanded'
   },
 
   browserSync: {
     proxy: "http://wp.dev/",
   }
 }
-
+console.log(config.sass.outputStyle)
 gulp.task('setup', ['moveBootstrapVariables', 'importBootstrap'], function(){
   // copy _bootstrap.scss and make path corrections
 });
@@ -58,6 +61,10 @@ gulp.task('browserSync', function(){
 })
 
 gulp.task('sass', function () {
+ 
+
+  config.sass.outputStyle = config.dist ? 'compressed' : 'expanded';
+
   return gulp.src( './src/sass/main.scss' )
     .pipe( sass(config.sass).on('error', sass.logError ) )
     .pipe( sourcemaps.init() )
@@ -66,7 +73,7 @@ gulp.task('sass', function () {
     .pipe( gulp.dest( assets.css.dist ) ) 
     .pipe( browserSync.stream() )
     .pipe( notify({ message: 'SASS Done', emitError: true }));
-;});
+});
 
 gulp.task('bootstrap', function(){
   return gulp.src( assets.css.src + 'bootstrap.scss' )
@@ -74,7 +81,6 @@ gulp.task('bootstrap', function(){
     .pipe( gulp.dest( assets.css.dist ) )
     .pipe( notify({ message: 'Bootstrap Done', emitError: true }));
 });
-
 
 // ### Images
 gulp.task('images', function() {
@@ -84,7 +90,7 @@ gulp.task('images', function() {
       interlaced: true,
       svgoPlugins: [{removeUnknownsAndDefaults: false}, {cleanupIDs: false}]
     }))
-    .pipe(gulp.dest(assets.img.dest))
+    .pipe(gulp.dest(assets.img.dist))
     .pipe(browserSync.stream());
 });
 
@@ -95,23 +101,30 @@ gulp.task('dev', ['browserSync', 'bootstrap', 'sass'], function(){
   gulp.watch( ['./**.php', './inc/**.php', './parts/**.php', './content/**.php'], browserSync.reload);
 });
 
-gulp.task('dist', ['scss', 'images', 'bootstrap'], function () {
+gulp.task('setDistFlag', function(){
+  config.dist = true;
+})
+
+gulp.task('dist', ['setDistFlag', 'sass', 'images', 'bootstrap'], function () {
   /**
    * Todo
    * - move files to dist
    * - clean up
    */
+
+  var themeName = argv.themeName;
+
+   
   gulp.src([
-      './content',
-      './inc',
-      './dist',
-      './parts',
-      './vendor',
-      './*.php',
-      './readme.md',
-      './*.css',
+      '**/*',
+      '!node_modules/',
+      '!src/',
+      '!.gitignore/',
+      '!gulpfile.js/',
+      '!webpack.config.js/',
+      '!package.json',
     ])
-    .pipe(gulp.dest('../wpAtomDist/'));
+    .pipe(gulp.dest( themeName ? '../' + themeName : '../wpAtomDist/'));
 });
 
 /*==========  Utilities  ==========*/
