@@ -1,12 +1,13 @@
-# wpAtom - WIP
-## Simple Theme Starter, that doesn't get in your way.
+# wpAtom - 0.0.1
+A wordpress start theme.
+Designed to provide minimal boilerplate, to use the newest front-end technologies.
 
 ###Packed with a lot of goodies:
-- webpack + babel-loader
+- webpack
+- es6
 - sass
 - bootstrap sass
 - composer
-- no bower
 
 ###Start:
 - npm install
